@@ -4,7 +4,7 @@ A lightweight, invisible solution to **automatically switch your MX Master mouse
 
 Supported platforms:
 - **Windows** (PowerShell scripts)
-- **macOS** (Python scripts)
+- **MacOS** (Python scripts)
 
 ## 🚀 The Problem
 Native Logitech "Easy-Switch" keys (1, 2, 3) only switch the keyboard. To switch the mouse, you have to lift it and press the button underneath, or use Logitech Flow (which requires network and software running).
@@ -14,11 +14,9 @@ These scripts use **hardware polling**. They detect when the keyboard disconnect
 
 **Benefits:**
 - Works even if the other PC is locked or sleeping.
-- No heavy background software required (PowerShell on Windows, Python on macOS).
+- No heavy background software required (PowerShell on Windows, Python on MacOS).
 - Instant switching.
 - Works with **MX Keys S**, **MX Master 3S**, and likely older Bolt/Unifying devices.
-
----
 
 ## Windows Version (PowerShell)
 
@@ -61,21 +59,19 @@ To make it run silently in the background at startup:
    `powershell.exe -WindowStyle Hidden -ExecutionPolicy Bypass -File "C:\LogiSwitch\PC1_SwitchTo2.ps1"`
    *(Change the filename accordingly for PC 2).*
 
----
+## MacOS Version (Python)
 
-## macOS Version (Python)
-
-### 📦 Prerequisites (macOS)
+### 📦 Prerequisites (MacOS)
 - 2 Macs (or 1 Mac + 1 Windows PC; each machine runs its own script).
 - **Python 3.8+** installed (`python3` available in your terminal).
-- `hidapitester` macOS binary from [`todbot/hidapitester` releases](https://github.com/todbot/hidapitester/releases).
+- `hidapitester` MacOS binary from [`todbot/hidapitester` releases](https://github.com/todbot/hidapitester/releases).
 - This repository's `macos` Python scripts.
 
 No extra Python packages are required (only the standard library).
 
-### 1. Download & Prepare (macOS)
+### 1. Download & Prepare (MacOS)
 1. Clone or download this repository.
-2. Download the macOS `hidapitester` binary from [`todbot/hidapitester` releases](https://github.com/todbot/hidapitester/releases).
+2. Download the MacOS `hidapitester` binary from [`todbot/hidapitester` releases](https://github.com/todbot/hidapitester/releases).
 3. Place the `hidapitester` binary inside the `macos` folder (next to `get_ids.py`, `pc1_switch_to2.py`, `pc2_switch_to1.py`).
 4. Make it executable:
    ```bash
@@ -83,7 +79,7 @@ No extra Python packages are required (only the standard library).
    chmod +x hidapitester
    ```
 
-### 2. Get your Hardware IDs (macOS)
+### 2. Get your Hardware IDs (MacOS)
 From the `macos` folder:
 ```bash
 cd path/to/Logitech-MX-Auto-Switch/macos
@@ -94,7 +90,7 @@ You will see a list of Logitech devices. Note:
 - The ID of your **keyboard** (e.g. `046D:B378`).
 - The ID of your **mouse** (e.g. `046D:B034`).
 
-### 3. Configure the Scripts (macOS)
+### 3. Configure the Scripts (MacOS)
 
 You run **one Python script per Mac**, similar to the Windows setup.
 
@@ -114,7 +110,7 @@ You run **one Python script per Mac**, similar to the Windows setup.
    - `TARGET_FOR_MOUSE` is `"0x00"` by default (send mouse back to channel 1 / Mac 1). Adjust if needed.
 3. Save the file.
 
-### 4. Run the Scripts (macOS)
+### 4. Run the Scripts (MacOS)
 
 On each Mac, from the repository root:
 ```bash
@@ -127,7 +123,7 @@ Leave the script running in a terminal. It will:
 - Continuously poll for the keyboard presence.
 - When the keyboard **disconnects** from that Mac (you pressed another Easy-Switch key), it sends the HID command to move the mouse to the configured channel.
 
-### 5. Auto-Start on macOS (Optional)
+### 5. Auto-Start on MacOS (Optional)
 
 You can make this run automatically at login, for example:
 - Create a small shell script such as `~/logiswitch_mac1.sh`:
@@ -140,8 +136,6 @@ You can make this run automatically at login, for example:
 - Add this script to **System Settings → General → Login Items**.
 
 Repeat similarly for `pc2_switch_to1.py` on the other Mac if needed.
-
----
 
 ## ⚠️ Disclaimer
 These scripts rely on `hidapitester` to send raw HID commands. Use at your own risk. This is not an official Logitech product.
